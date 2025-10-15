@@ -1,4 +1,4 @@
-from attrs import define
+from attrs import define, field
 from cattrs import structure
 
 
@@ -54,12 +54,12 @@ class OpenLibBookAPI:
     authors: list[dict]
     works: list[dict]
     type: dict
-    identifiers: dict
     isbn_10: list[str]
     isbn_13: list[str]
-    classifications: dict
     lc_classifications: list[str]
     latest_revision: int
     revision: int
     created: dict
     last_modified: dict
+    identifiers: dict = field(default = {})
+    classifications: dict = field(default = {})
