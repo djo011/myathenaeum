@@ -1,4 +1,5 @@
 from attrs import define
+from cattrs import structure
 
 
 @define
@@ -9,8 +10,8 @@ class OpenLibAuthorAPI:
     birth_date: str
     personal_name: str
     remote_ids: dict
-    source_records: dict
-    photos: dict
+    source_records: list
+    photos: list
     death_date: str
     type: dict
     title: str
