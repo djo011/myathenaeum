@@ -60,7 +60,3 @@ class OpenLib:
         book_api_data = json.loads(response.content.decode(encoding="utf-8"))
         return structure(book_api_data, OpenLibBookAPI)
 
-
-# OpenLib().get_author(author_key="/authors/OL34221A")
-# print(OpenLib().get_work(work_key="/work/OL46347W"))
-# print(OpenLib().get_book(isbn="9780008117535"))
