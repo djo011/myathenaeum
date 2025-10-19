@@ -1,21 +1,9 @@
-from flask import Flask, redirect, render_template, request
-from flask_sqlalchemy import SQLAlchemy
-from openlib import OpenLib
+from flask import redirect, render_template, request
 
-app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///athenaeum.db'
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False  # Avoids a warning
-db = SQLAlchemy(app)
+from myathenaeum.db_models import Bookshelf
+from myathenaeum import app, db
 
-
-class Bookshelf(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    title = db.Column(db.String(200), nullable = False)
-    author = db.Column(db.String(200), nullable = False)
-
-    def __repr__(self):
-        return super().__repr__()
-
+from myathenaeum.openlib import OpenLib
 
 @app.route('/', methods=['POST', 'GET'])
 def index():
@@ -51,8 +39,3 @@ def delete(id):
         return redirect("/")
     except:
         return "There was a problem deleting the book"
-
-if __name__ == "__main__":
-    with app.app_context():
-        db.create_all()
-    app.run(debug=True)

@@ -1,7 +1,7 @@
 import requests
 import json
 
-from datamodel import OpenLibAuthorAPI, OpenLibBookAPI, OpenLibWorkAPI
+from myathenaeum.datamodel import OpenLibAuthorAPI, OpenLibBookAPI, OpenLibWorkAPI
 from cattrs import structure
 
 class OpenLib:
@@ -59,4 +59,3 @@ class OpenLib:
 
         book_api_data = json.loads(response.content.decode(encoding="utf-8"))
         return structure(book_api_data, OpenLibBookAPI)
-
