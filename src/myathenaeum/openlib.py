@@ -1,8 +1,10 @@
 import requests
 import json
 
-from myathenaeum.datamodel import OpenLibAuthorAPI, OpenLibBookAPI, OpenLibWorkAPI
-from cattrs import structure
+from myathenaeum.datamodel import OpenLibAuthorAPI, OpenLibBookAPI, OpenLibWorkAPI, OpenLibBook
+from cattrs import structure, Converter
+from datetime import datetime, date
+
 
 class OpenLib:
     """Connection to the OpenLib API/Web page to retrieve information about books."""
@@ -59,3 +61,26 @@ class OpenLib:
 
         book_api_data = json.loads(response.content.decode(encoding="utf-8"))
         return structure(book_api_data, OpenLibBookAPI)
+
+    def get_full_book_info(self, isbn: str) -> dict | None:
+        book = self.get_book(isbn=isbn)
+
+        author_key = book.authors[0]["key"]
+        author = self.get_author(author_key=author_key)
+
+        work_key = book.works[0]["key"]
+        work = self.get_work(work_key=work_key)
+
+        ol_book = {
+            "id": book.isbn_10[0],
+            "title": book.title,
+            "author": author.name,
+            "description": work.description,
+            "publication_date": book.publish_date,
+            "publisher": book.publishers[0],
+        }
+
+        c = Converter()
+        c.register_structure_hook(date, lambda s, _: datetime.strptime(s, "%b %d, %Y").date())
+
+        return c.structure(ol_book, OpenLibBook)

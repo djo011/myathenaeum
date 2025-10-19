@@ -1,4 +1,5 @@
 from attrs import define, field
+from datetime import date
 
 
 @define
@@ -27,7 +28,6 @@ class OpenLibAuthorAPI:
 @define
 class OpenLibWorkAPI:
     description: str
-    links: dict
     title: str
     covers: list[int]
     subject_places: list[str]
@@ -40,6 +40,7 @@ class OpenLibWorkAPI:
     revision: int
     created: dict
     last_modified: dict
+    links: list[dict] = field(default=[])
 
 
 @define
@@ -60,5 +61,15 @@ class OpenLibBookAPI:
     revision: int
     created: dict
     last_modified: dict
-    identifiers: dict = field(default = {})
-    classifications: dict = field(default = {})
+    identifiers: dict = field(default={})
+    classifications: dict = field(default={})
+
+
+@define
+class OpenLibBook:
+    id: int
+    title: str
+    author: str
+    description: str
+    publication_date: date
+    publisher: str
