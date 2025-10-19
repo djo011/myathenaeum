@@ -1,5 +1,4 @@
 from attrs import define, field
-from cattrs import structure
 
 
 @define
