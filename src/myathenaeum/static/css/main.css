@@ -1,4 +1,36 @@
-body {
+body, html {
     margin: 0;
     font-family: sans-serif;
+}
+
+.content {
+    margin: 0 auto;
+    width: 50%;
+}
+
+table, td, th {
+    border: 2px solid #797979;
+}
+
+table {
+    border-collapse: separate;
+    width: 100%;
+}
+
+th {
+    height: 30px;
+}
+
+td {
+    text-align: center;
+    padding: 5px;
+}
+
+.form {
+    margin-top: 2px;
+}
+
+#content {
+    margin-top: 10px;
+    width: 80%;
 }
