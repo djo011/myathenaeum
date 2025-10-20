@@ -13,6 +13,8 @@
             <th>ISBN</th>
             <th>Title</th>
             <th>Author</th>
+            <th>Publisher</th>
+            <th>Published</th>
             <th>Actions</th>
         </tr>
         {% for book in books %}
@@ -20,6 +22,8 @@
                 <td>{{ book.id }}</td>
                 <td>{{ book.title }}</td>
                 <td>{{ book.author }}</td>
+                <td>{{ book.publisher }}</td>
+                <td>{{ book.publication_date }}</td>
                 <td>
                     <a href="/delete/{{book.id}}">Delete</a>
                 </td>
