@@ -1,5 +1,5 @@
 from attrs import asdict
-from flask import redirect, render_template, request
+from flask import Response, redirect, render_template, request
 
 from myathenaeum.db_models import Bookshelf
 from myathenaeum import app, db
@@ -8,7 +8,8 @@ from myathenaeum.openlib import OpenLib
 
 
 @app.route("/", methods=["POST", "GET"])
-def index():
+def index() -> str | Response:
+    """Main page for application."""
     ol = OpenLib()
     if request.method == "POST":
         isbn = request.form["content"]
@@ -30,7 +31,7 @@ def index():
 
 
 @app.route("/delete/<int:id>")
-def delete(id):
+def delete(id) -> str | Response:
     book_to_delete = Bookshelf.query.get_or_404(id)
     try:
         db.session.delete(book_to_delete)

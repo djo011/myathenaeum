@@ -1,9 +1,13 @@
+"""Module containing attrs classes."""
+
 from attrs import define, field
 from datetime import date
 
 
 @define
 class OpenLibAuthorAPI:
+    """Attrs class representation of author response from openlib API."""
+
     name: str
     bio: dict
     entity_type: str
@@ -27,6 +31,8 @@ class OpenLibAuthorAPI:
 
 @define
 class OpenLibWorkAPI:
+    """Attrs clas representation of work response from openlib API."""
+
     description: str
     title: str
     covers: list[int]
@@ -45,6 +51,8 @@ class OpenLibWorkAPI:
 
 @define
 class OpenLibBookAPI:
+    """Attrs clas representation of book response from openlib API."""
+
     publishers: list[str]
     source_records: list[str]
     title: str
@@ -67,6 +75,8 @@ class OpenLibBookAPI:
 
 @define
 class OpenLibBook:
+    """Attrs class representing the datamodel used for storing book information in database."""
+
     id: int
     title: str
     author: str
